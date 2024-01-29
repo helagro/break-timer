@@ -1,0 +1,1 @@
+Works for macOS only.
