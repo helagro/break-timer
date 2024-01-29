@@ -1,4 +1,6 @@
-#include "log.c"
+#include "log/main.c"
+#include "def.h"
+#include "log/setup.c"
 #include "options.c"
 #include "utils.c"
 #include <stdlib.h>
@@ -6,21 +8,17 @@
 
 /* ------------------------- MACROS ------------------------- */
 
-#define MAX_PATH_LENGTH    256
 #define MAX_COMMAND_LENGTH 275
 
 /* ------------------------ FUNCTIONS ----------------------- */
 
 void displayNotification() {
-    system("osascript -e 'display notification \"Take a break\" with title \"Break Timer\"'");
+    system("osascript -e 'display notification \"V-0.1\" with title \"Break Timer\"'");
 }
 
-char getCommand(char *output) {
+_Bool getCommand(char *output) {
     char folder[MAX_PATH_LENGTH];
-    if (!getFolder(folder, MAX_PATH_LENGTH)) {
-        note("Error getting folder");
-        return 0;
-    }
+    if (!getFolder(folder)) return 0;
 
     sprintf(output, "afplay %s/funk.mp3", folder);
     return 1;
@@ -48,6 +46,8 @@ void run() {
 }
 
 int main() {
+    if (!setupLogs()) return 1;
+
     if (!loadOptions()) {
         note("Error loading options");
         return 1;

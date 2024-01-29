@@ -1,8 +1,12 @@
 #pragma once
 
+#include "def.h"
+#include "log/main.c"
 #include <stdio.h>
 
-char getFolder(char *output, const int s) {
+char getFolder(char *output) {
+    const int s = MAX_PATH_LENGTH;
+
     if (_NSGetExecutablePath(output, &s) == 0) {
         unsigned int i = 0;
 
@@ -17,5 +21,6 @@ char getFolder(char *output, const int s) {
         }
     }
 
+    note("Error getting folder");
     return 0;
 }

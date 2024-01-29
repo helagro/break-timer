@@ -1,3 +1,6 @@
+#pragma once
+
+#include "setup.c"
 #include <stdio.h>
 #include <time.h>
 
@@ -16,7 +19,7 @@ void stamp(char *input) {
 }
 
 void note(char *message) {
-    FILE *file = fopen("main.log", "a");
+    FILE *file = fopen(getLogsPath(), "a");
 
     if (file == NULL) {
         fprintf(stderr, "Error opening log file\n");

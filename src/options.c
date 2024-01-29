@@ -1,3 +1,4 @@
+#include "def.h"
 #include "utils.c"
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,30 +6,26 @@
 
 /* ------------------------- MACROS ------------------------- */
 
-#define MAX_PATH_LENGTH 256
 #define MAX_LINE_LENGTH 128
 
 /* ------------------------ VARIABLES ----------------------- */
 
 unsigned char _timerLength = 25;
 unsigned char _secondsPerMinute = 60;
-char _silent = 0;
-char _notification = 1;
+_Bool _silent = 0;
+_Bool _notification = 1;
 
 /* ------------------------- METHODS ------------------------ */
 
-char getFilePath(char *output) {
+_Bool getFilePath(char *output) {
     char folder[MAX_PATH_LENGTH];
-    if (!getFolder(folder, MAX_PATH_LENGTH)) {
-        note("Error getting folder");
-        return 0;
-    }
+    if (!getFolder(folder)) return 0;
 
     sprintf(output, "%s/.env", folder);
     return 1;
 }
 
-char loadOptions() {
+_Bool loadOptions() {
     char filePath[266];
     if (!getFilePath(filePath)) {
         note("Error getting file path");
@@ -67,10 +64,10 @@ unsigned char getTimerSeconds() {
     return _timerLength * _secondsPerMinute;
 }
 
-char isSilent() {
+_Bool isSilent() {
     return _silent;
 }
 
-char isNotification() {
+_Bool isNotification() {
     return _notification;
 }
