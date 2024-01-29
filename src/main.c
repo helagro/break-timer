@@ -36,7 +36,7 @@ void run() {
         fflush(stdout);
         if (system(command)) note("Error playing sound");
 
-        if (i % 4 == 0) loadOptions();
+        loadOptions();
     }
 }
 
@@ -48,7 +48,6 @@ int main() {
 
     char folder[256];
 
-    // printf("%d ! %s\n", getFolder(folder, 256), folder);
     run();
 
     return 0;
