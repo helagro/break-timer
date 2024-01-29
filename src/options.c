@@ -50,7 +50,7 @@ char loadOptions() {
         if (strcmp(key, "SILENT") == 0) _silent = value[0] == '1';
         if (strcmp(key, "NOTIFICATION") == 0) _notification = value[0] == '1';
         if (strcmp(key, "QUIT") == 0 && value[0] == '1') {
-            printf("Quitting due to .env value\n");
+            note("Quitting due to .env value");
 
             fclose(file);
             return 0;

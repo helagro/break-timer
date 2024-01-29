@@ -43,7 +43,7 @@ void run() {
             if (system(command)) note("Error playing sound");
         if (isNotification()) displayNotification();
 
-        loadOptions();
+        if (!loadOptions()) return;
     }
 }
 
