@@ -2,9 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* ------------------------- MACROS ------------------------- */
+
 #define MAX_LINE_LENGTH 32
 
+/* ------------------------ VARIABLES ----------------------- */
+
 unsigned char _timerLength = 25;
+
+/* ------------------------- METHODS ------------------------ */
 
 char loadOptions() {
     FILE *file = fopen(".env", "r");
@@ -21,4 +27,10 @@ char loadOptions() {
     }
 
     return 1;
+}
+
+/* ------------------------- GETTERS ------------------------ */
+
+unsigned char getTimerSeconds() {
+    return _timerLength * 6;
 }
