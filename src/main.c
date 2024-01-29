@@ -39,11 +39,11 @@ void run() {
         note("break");
         fflush(stdout);
 
+        if (!loadOptions()) return;
+
+        if (isNotification()) displayNotification();
         if (!isSilent())
             if (system(command)) note("Error playing sound");
-        if (isNotification()) displayNotification();
-
-        if (!loadOptions()) return;
     }
 }
 
