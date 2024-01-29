@@ -11,6 +11,7 @@
 /* ------------------------ VARIABLES ----------------------- */
 
 unsigned char _timerLength = 25;
+unsigned char _secondsPerMinute = 60;
 char _silent = 0;
 char _notification = 1;
 
@@ -45,16 +46,25 @@ char loadOptions() {
         char *value = strtok(NULL, "=");
 
         if (strcmp(key, "LENGTH") == 0) _timerLength = atoi(value);
+        if (strcmp(key, "SECONDS_PER_MINUTE") == 0) _secondsPerMinute = atoi(value);
         if (strcmp(key, "SILENT") == 0) _silent = value[0] == '1';
         if (strcmp(key, "NOTIFICATION") == 0) _notification = value[0] == '1';
+        if (strcmp(key, "QUIT") == 0 && value[0] == '1') {
+            printf("Quitting due to .env value\n");
+
+            fclose(file);
+            return 0;
+        }
     }
+
+    fclose(file);
     return 1;
 }
 
 /* ------------------------- GETTERS ------------------------ */
 
 unsigned char getTimerSeconds() {
-    return _timerLength * 60;
+    return _timerLength * _secondsPerMinute;
 }
 
 char isSilent() {
