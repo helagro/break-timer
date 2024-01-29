@@ -1,0 +1,11 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 100
+SpaceAfterCStyleCast: true
+UseTab: Never
+AlignTrailingComments: false
+SpacesBeforeTrailingComments: 3
+AlignConsecutiveMacros: Consecutive
+IndentCaseLabels: true
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: true
