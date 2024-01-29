@@ -4,12 +4,14 @@
 #include <unistd.h>
 
 void run() {
-    while (1) {
+    for (unsigned char i = 0; 1; i++) {
         sleep(getTimerSeconds());
+
         note("break");
         fflush(stdout);
+        if (system(getPlayCommand())) note("Error playing sound");
 
-        if (system("afplay funk.mp3")) note("Error playing sound");
+        if (i % 4 == 0) loadOptions();
     }
 }
 

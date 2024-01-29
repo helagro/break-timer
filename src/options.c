@@ -4,11 +4,14 @@
 
 /* ------------------------- MACROS ------------------------- */
 
-#define MAX_LINE_LENGTH 32
+#define MAX_LINE_LENGTH 128
 
 /* ------------------------ VARIABLES ----------------------- */
 
 unsigned char _timerLength = 25;
+
+char _setPlayCommand = 0;
+char *_playCommand = "afplay funk.mp3";
 
 /* ------------------------- METHODS ------------------------ */
 
@@ -21,9 +24,16 @@ char loadOptions() {
         if (line[0] == '#' || line[0] == '\n' || line[0] == '\r' || line[0] == '\0') continue;
 
         const char *key = strtok(line, "=");
-        const char *value = strtok(NULL, "=");
+        char *value = strtok(NULL, "=");
 
         if (strcmp(key, "TIMER_LENGTH") == 0) _timerLength = atoi(value);
+        if (strcmp(key, "PLAY_COMMAND") == 0) {
+            if (_setPlayCommand) free(_playCommand);
+            _setPlayCommand = 1;
+
+            _playCommand = malloc(strlen(value) + 1);
+            strcpy(_playCommand, value);
+        }
     }
 
     return 1;
@@ -32,5 +42,9 @@ char loadOptions() {
 /* ------------------------- GETTERS ------------------------ */
 
 unsigned char getTimerSeconds() {
-    return _timerLength * 6;
+    return _timerLength * 1;
+}
+
+char *getPlayCommand() {
+    return _playCommand;
 }
