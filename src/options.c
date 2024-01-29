@@ -11,9 +11,8 @@
 /* ------------------------ VARIABLES ----------------------- */
 
 unsigned char _timerLength = 25;
-
-char _setPlayCommand = 0;
-char *_playCommand = "";
+char _silent = 0;
+char _notification = 1;
 
 /* ------------------------- METHODS ------------------------ */
 
@@ -45,14 +44,23 @@ char loadOptions() {
         const char *key = strtok(line, "=");
         char *value = strtok(NULL, "=");
 
-        if (strcmp(key, "TIMER_LENGTH") == 0) _timerLength = atoi(value);
+        if (strcmp(key, "LENGTH") == 0) _timerLength = atoi(value);
+        if (strcmp(key, "SILENT") == 0) _silent = value[0] == '1';
+        if (strcmp(key, "NOTIFICATION") == 0) _notification = value[0] == '1';
     }
-
     return 1;
 }
 
 /* ------------------------- GETTERS ------------------------ */
 
 unsigned char getTimerSeconds() {
-    return _timerLength * 1;
+    return _timerLength * 60;
+}
+
+char isSilent() {
+    return _silent;
+}
+
+char isNotification() {
+    return _notification;
 }

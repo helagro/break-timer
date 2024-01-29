@@ -11,6 +11,10 @@
 
 /* ------------------------ FUNCTIONS ----------------------- */
 
+void displayNotification() {
+    system("osascript -e 'display notification \"Take a break\" with title \"Break Timer\"'");
+}
+
 char getCommand(char *output) {
     char folder[MAX_PATH_LENGTH];
     if (!getFolder(folder, MAX_PATH_LENGTH)) {
@@ -34,7 +38,10 @@ void run() {
 
         note("break");
         fflush(stdout);
-        if (system(command)) note("Error playing sound");
+
+        if (!isSilent())
+            if (system(command)) note("Error playing sound");
+        if (isNotification()) displayNotification();
 
         loadOptions();
     }
