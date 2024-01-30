@@ -17,5 +17,6 @@ void note(char *message) {
     char timeStamp[20];
     stamp(timeStamp, "%Y-%m-%d %H:%M", 20);
     fprintf(file, "%s - %s\n", timeStamp, message);
+
     fclose(file);
 }

@@ -5,8 +5,6 @@
 
 _Bool setupLogs() {
 
-    /* --------------------- SETUP LOG PATH --------------------- */
-
     char folder[MAX_PATH_LENGTH];
     if (!getFolder(folder)) {
         fprintf(stderr, "Error setting up logs");
@@ -14,8 +12,6 @@ _Bool setupLogs() {
     }
 
     sprintf(getLogsPath(), "%s/main.log", folder);
-
-    /* --------------------- SETUP NOTIFICATION COMMAND --------------------- */
 
     return 1;
 }
