@@ -1,8 +1,9 @@
-#include "log/main.c"
 #include "def.h"
+#include "log/log.c"
 #include "log/setup.c"
+#include "notification.c"
 #include "options.c"
-#include "utils.c"
+#include "utils/utils.c"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -11,10 +12,6 @@
 #define MAX_COMMAND_LENGTH 275
 
 /* ------------------------ FUNCTIONS ----------------------- */
-
-void displayNotification() {
-    system(getNotificationCommand());
-}
 
 _Bool getCommand(char *output) {
     char folder[MAX_PATH_LENGTH];
@@ -52,8 +49,6 @@ int main() {
         note("Error loading options");
         return 1;
     }
-
-    char folder[256];
 
     run();
 

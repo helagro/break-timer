@@ -1,22 +1,8 @@
 #pragma once
 
+#include "../utils/time.c"
 #include "options.c"
 #include <stdio.h>
-#include <time.h>
-
-#define TIMESTAMP_LENGTH 20
-
-void stamp(char *input) {
-    time_t t;
-    struct tm *tm_info;
-
-    time(&t);
-    tm_info = localtime(&t);
-
-    if (tm_info != NULL) {
-        strftime(input, TIMESTAMP_LENGTH, "%Y-%m-%d %H:%M", tm_info);
-    }
-}
 
 void note(char *message) {
     FILE *file = fopen(getLogsPath(), "a");
@@ -28,8 +14,8 @@ void note(char *message) {
 
     printf("%s\n", message);
 
-    char timeStamp[TIMESTAMP_LENGTH];
-    stamp(timeStamp);
+    char timeStamp[20];
+    stamp(timeStamp, "%Y-%m-%d %H:%M", 20);
     fprintf(file, "%s - %s\n", timeStamp, message);
     fclose(file);
 }

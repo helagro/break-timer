@@ -1,5 +1,5 @@
 #include "def.h"
-#include "utils.c"
+#include "utils/utils.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

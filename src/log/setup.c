@@ -1,5 +1,5 @@
 #include "../def.h"
-#include "../utils.c"
+#include "../utils/utils.c"
 #include "options.c"
 #include <unistd.h>
 
@@ -16,10 +16,6 @@ _Bool setupLogs() {
     sprintf(getLogsPath(), "%s/main.log", folder);
 
     /* --------------------- SETUP NOTIFICATION COMMAND --------------------- */
-
-    sprintf(getNotificationCommand(),
-            "osascript -e 'display notification \"%s | %d\" with title \"Break Timer\"'", VERSION,
-            getpid());
 
     return 1;
 }

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "def.h"
-#include "log/main.c"
+#include "../def.h"
+#include "../log/log.c"
 #include <stdio.h>
 
 char getFolder(char *output) {
