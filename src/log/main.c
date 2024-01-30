@@ -1,6 +1,6 @@
 #pragma once
 
-#include "setup.c"
+#include "options.c"
 #include <stdio.h>
 #include <time.h>
 

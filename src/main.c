@@ -13,7 +13,7 @@
 /* ------------------------ FUNCTIONS ----------------------- */
 
 void displayNotification() {
-    system("osascript -e 'display notification \"V-0.1\" with title \"Break Timer\"'");
+    system(getNotificationCommand());
 }
 
 _Bool getCommand(char *output) {
