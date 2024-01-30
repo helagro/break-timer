@@ -60,7 +60,7 @@ _Bool loadOptions() {
 
 /* ------------------------- GETTERS ------------------------ */
 
-unsigned char getTimerSeconds() {
+unsigned int getTimerSeconds() {
     return _timerLength * _secondsPerMinute;
 }
 
