@@ -8,12 +8,17 @@
 
 #define MAX_LINE_LENGTH 128
 
+#define DFT_TIMER_LENGTH       25
+#define DFT_SECONDS_PER_MINUTE 60
+#define DFT_SILENT             0
+#define DFT_NOTIFICATION       1
+
 /* ------------------------ VARIABLES ----------------------- */
 
-unsigned char _timerLength = 25;
-unsigned char _secondsPerMinute = 60;
-_Bool _silent = 0;
-_Bool _notification = 1;
+unsigned char _timerLength = DFT_TIMER_LENGTH;
+unsigned char _secondsPerMinute = DFT_SECONDS_PER_MINUTE;
+_Bool _silent = DFT_SILENT;
+_Bool _notification = DFT_NOTIFICATION;
 
 /* ------------------------- METHODS ------------------------ */
 
@@ -25,6 +30,13 @@ _Bool getFilePath(char *output) {
     return 1;
 }
 
+void _resetOptions() {
+    _timerLength = DFT_TIMER_LENGTH;
+    _secondsPerMinute = DFT_SECONDS_PER_MINUTE;
+    _silent = DFT_SILENT;
+    _notification = DFT_NOTIFICATION;
+}
+
 _Bool loadOptions() {
     char filePath[266];
     if (!getFilePath(filePath)) {
@@ -34,6 +46,8 @@ _Bool loadOptions() {
 
     FILE *file = fopen(filePath, "r");
     if (file == NULL) return 0;
+
+    _resetOptions();
 
     char line[MAX_LINE_LENGTH];
     while (fgets(line, sizeof(line), file)) {
