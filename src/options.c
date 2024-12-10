@@ -1,3 +1,5 @@
+#pragma once
+
 #include "def.h"
 #include "utils/utils.c"
 #include <stdio.h>
@@ -19,6 +21,7 @@ unsigned char _timerLength = DFT_TIMER_LENGTH;
 unsigned char _secondsPerMinute = DFT_SECONDS_PER_MINUTE;
 _Bool _silent = DFT_SILENT;
 _Bool _notification = DFT_NOTIFICATION;
+char _customTextCommand[256] = "";
 
 /* ------------------------- METHODS ------------------------ */
 
@@ -60,6 +63,7 @@ _Bool loadOptions() {
         if (strcmp(key, "SECONDS_PER_MINUTE") == 0) _secondsPerMinute = atoi(value);
         if (strcmp(key, "SILENT") == 0) _silent = value[0] == '1';
         if (strcmp(key, "NOTIFICATION") == 0) _notification = value[0] == '1';
+        if (strcmp(key, "CUSTOM_TEXT_COMMAND") == 0) strcpy(_customTextCommand, value);
         if (strcmp(key, "QUIT") == 0 && value[0] == '1') {
             note("Quitting due to .env value");
 
@@ -84,4 +88,8 @@ _Bool isSilent() {
 
 _Bool isNotification() {
     return _notification;
+}
+
+char *getCustomTextCommand() {
+    return _customTextCommand;
 }

@@ -5,7 +5,6 @@
 #include "options.c"
 #include "utils/utils.c"
 #include <stdlib.h>
-#include <unistd.h>
 
 /* ------------------------- MACROS ------------------------- */
 
