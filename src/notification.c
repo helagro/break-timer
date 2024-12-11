@@ -29,16 +29,14 @@ _Bool getCustomPart(char *buffer, int size) {
 void displayNotification() {
     char notificationCommand[500];
     char customPartBuffer[350];
-    char timeStamp[18];
-    stamp(timeStamp, "%H:%M", 18);
 
     if (getCustomPart(customPartBuffer, 600)) {
         sprintf(customPartBuffer, "Break time!");
     }
 
     sprintf(notificationCommand,
-            "osascript -e 'display notification \" %s | %s | %d\" with title \"Break Timer\"'",
-            customPartBuffer + 6, timeStamp, getpid());
+            "osascript -e 'display notification \" %s | %d\" with title \"Break Timer\"'",
+            customPartBuffer + 6, getpid());
 
     system(notificationCommand);
 }
