@@ -6,37 +6,45 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define NOTIFICATION_COMMAND_SIZE 600
+#define CUSTOM_PART_SIZE          400
+
 _Bool getCustomPart(char *buffer, int size) {
     FILE *fp = popen(getCustomTextCommand(), "r");
+    buffer[0] = '\0';
 
     if (fp == NULL) {
-        perror("popen failed!");
+        note("popen failed!");
         return 1;
     }
 
-    // Read and print the output line by line
-    while (fgets(buffer, size, fp) != NULL) {
+    if (fgets(buffer, size, fp) == NULL) {
+        return 1;
     }
 
     int status = pclose(fp);
     if (status == -1) {
-        perror("pclose failed!");
+        note("pclose failed!");
     }
 
     return 0;
 }
 
 void displayNotification() {
-    char notificationCommand[500];
-    char customPartBuffer[350];
+    char notificationCommand[NOTIFICATION_COMMAND_SIZE];
+    char customPartBuffer[CUSTOM_PART_SIZE];
 
-    if (getCustomPart(customPartBuffer, 600)) {
+    if (getCustomPart(customPartBuffer, CUSTOM_PART_SIZE)) {
         sprintf(customPartBuffer, "Break time!");
     }
 
-    sprintf(notificationCommand,
-            "osascript -e 'display notification \" %s | %d\" with title \"Break Timer\"'",
-            customPartBuffer + 6, getpid());
+    if (strlen(customPartBuffer) == 0) {
+        note("Error getting custom part, read: empty string");
+    }
+
+    snprintf(notificationCommand, NOTIFICATION_COMMAND_SIZE,
+             "osascript -e 'display notification \" %s | %d\" with title \"Break Timer\"'",
+             customPartBuffer, getpid());
 
     system(notificationCommand);
 }

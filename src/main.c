@@ -27,7 +27,7 @@ void run() {
         return;
     }
 
-    for (unsigned char i = 0; 1; i++) {
+    while (1) {
         sleep(getTimerSeconds());
 
         note("break");
@@ -43,6 +43,8 @@ void run() {
 
 int main() {
     if (!setupLogs()) return 1;
+
+    note("RUNNING");
 
     if (!loadOptions()) {
         note("Error loading options");
